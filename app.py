@@ -48,7 +48,7 @@ with tab3:
     ]
 
     # Create Folium map with CartoDB Voyager background
-    m = folium.Map(location=[45, -40], zoom_start=3, tiles="CartoDB.Voyager")
+    m = folium.Map(location=[45, -40], zoom_start=3, tiles="Stadia.StamenWatercolor")
 
     # Add markers
     for i, (name, coord) in enumerate(coords):
