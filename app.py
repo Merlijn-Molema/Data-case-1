@@ -1,10 +1,10 @@
 import streamlit as st
 import folium
-from streamlit_folium import st_folium 
+from streamlit_folium import st_folium
 
 # --- Page setup ---
 st.set_page_config(page_title="Titanic Route Map", page_icon="🛳️", layout="centered")
-st.title("🗺️ Titanic Route Map (Historical Waypoints with Sinking Point)")
+st.title("🗺️ Titanic Route Map (Historical Waypoints + Passenger Pickup Points)")
 
 tab1, tab2, tab3 = st.tabs(["🏠 Home", "📊 Analytics", "🚢 Titanic Route"])
 
@@ -24,13 +24,14 @@ with tab2:
 with tab3:
     st.header("Titanic Route Map")
     st.write("""
-        This map shows the Titanic's route using historical waypoints.
-        Red line: reached route (including sinking point)  
-        Green dashed line: planned/unreached route  
-        Blue markers: reached points  
-        Black marker: sinking point  
-        Green markers: planned/unreached points  
-        Background map: CartoDB Voyager (soft and pleasant)
+        This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
+        - Red line: reached route (including sinking point)  
+        - Green dashed line: planned/unreached route  
+        - Blue markers: reached points  
+        - Black marker: sinking point  
+        - Green markers: planned/unreached points  
+        - Purple markers: passenger pickup points  
+        Background map: Esri NatGeo World Map
     """)
 
     # Coordinates from ET article
@@ -47,10 +48,17 @@ with tab3:
         ("Intended Destination: New York", [40.7128, -74.0060])
     ]
 
-    # Create Folium map with CartoDB Voyager background
+    # Passenger pickup points
+    pickup_points = [
+        ("Southampton, UK", [50.9097, -1.4044]),
+        ("Cherbourg, France", [49.6341, -1.6222]),
+        ("Queenstown (Cobh), Ireland", [51.8496, -8.2945])
+    ]
+
+    # Create Folium map with Esri NatGeo background
     m = folium.Map(location=[45, -40], zoom_start=3, tiles="Esri.NatGeoWorldMap")
 
-    # Add markers
+    # Add reached points (blue)
     for i, (name, coord) in enumerate(coords):
         if i <= 6:  # First 7 reached points
             folium.Marker(
@@ -70,6 +78,14 @@ with tab3:
                 popup=f"<b>{name}</b>",
                 icon=folium.Icon(color="green", icon="flag", prefix="fa")
             ).add_to(m)
+
+    # Add passenger pickup points (purple)
+    for name, coord in pickup_points:
+        folium.Marker(
+            location=coord,
+            popup=f"<b>{name} (Passenger Pickup)</b>",
+            icon=folium.Icon(color="purple", icon="user", prefix="fa")
+        ).add_to(m)
 
     # Red line: first 7 coords + sinking point
     folium.PolyLine(
