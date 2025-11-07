@@ -24,12 +24,13 @@ with tab2:
 with tab3:
     st.header("Titanic Route Map")
     st.write("""
-        This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
+        This map shows the Titanic's route using historical waypoints.
         Red line: reached route (including sinking point)  
         Green dashed line: planned/unreached route  
         Blue markers: reached points  
         Black marker: sinking point  
-        Green markers: planned/unreached points
+        Green markers: planned/unreached points  
+        Background map: CartoDB Voyager (soft and pleasant)
     """)
 
     # Coordinates from ET article
@@ -46,8 +47,8 @@ with tab3:
         ("Intended Destination: New York", [40.7128, -74.0060])
     ]
 
-    # Create Folium map
-    m = folium.Map(location=[45, -40], zoom_start=3, tiles="CartoDB positron")
+    # Create Folium map with CartoDB Voyager background
+    m = folium.Map(location=[45, -40], zoom_start=3, tiles="CartoDB Voyager")
 
     # Add markers
     for i, (name, coord) in enumerate(coords):
