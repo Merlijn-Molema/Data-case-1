@@ -130,14 +130,24 @@ with tab_analytics:
     st.write("""Het maken van een voorspelling begint met een nette dataset, hiermee is ook de eerste stap om alle missende waardes weg te werken, 
                 de intieele data van Kaggle komt met 12 kolomen waarvan somig missende data bevatten""")
     data = {
-    "Stop": ["Southampton", "Cherbourg", "Queenstown (Cobh)"],
-    "Country": ["UK", "France", "Ireland"],
-    "Passengers Boarded": [123, 85, 120]
+    "Name": ["Titanic"],
+    "Length": [269],
+    "Width": [28],
+    "Tonnage": [46428],
+    "Decks": [9],
+    "Passengers": [2224],
+    "Crew": [892],
+    "Maiden Voyage": ["10-Apr-1912"],
+    "Sinking Date": ["15-Apr-1912"],
+    "Lifeboats": [20],
+    "Iceberg Collision": ["Yes"],
+    "Casualties": [1514]
     }
     
     df = pd.DataFrame(data)
     
-    st.table(df)
+    # Transpose to 12 rows x 1 column
+    st.table(df.T)
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
