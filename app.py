@@ -175,6 +175,11 @@ with tab_analytics:
     st.image("testvolume.png")
     st.write("ook is te visualizeeren hoe de modellen verbeteren met iteraties")
     st.image("history.png")
+    st.write("""na al deze computatie is ons model terug gekomen met een interne accuraatheid van **86%**, dit is natuurlijk bias door cross checking op de zelfde data, 
+    dus waneer deze score word gesubmit naar kaggle blijft er ongveer **78%** over. dit is een klassiek syptoom van overfitting of memorization van de data, 
+    de volgende stap in dit process zou zijn om dit te beperken met een limiet op max_depth de meest toerijkbare manier""")
+    st.write("""Ook is er natuurlijk intresse in de waarde van data voor survival, hier zijn de best 10 genoteerd""")
+    st.image("importance.png")
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
