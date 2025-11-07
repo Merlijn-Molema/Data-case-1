@@ -173,6 +173,8 @@ with tab_analytics:
     st.image("testlast.png")
     st.write("na dat de zoek range goed bepaald is kunnen we gaan trainen in volume in de orde van duizenden modellen.")
     st.image("testvolume.png")
+    st.write("ook is te visualizeeren hoe de modellen verbeteren met iteraties")
+    st.image("history.png")
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
