@@ -178,7 +178,7 @@ with tab_home:
 
 # --- Tab 3: Analytics ---
 with tab_analytics:
-    
+    st.header("")
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
