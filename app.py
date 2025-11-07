@@ -147,6 +147,14 @@ with tab_analytics:
     df_transposed = df.T.reset_index()
     df_transposed.columns = ["Data", "Missende waardes"]
     st.table(df_transposed.set_index("Data"))
+
+    st.write("""Dit betekend dat Embarked, Age en Cabin verwerkt moeten worden om de dataset te completeren.
+    Embarked is hier de makelijkste van, de twee missende waardes kunnen worden gevuld met de meest voorkomende waarde Southampton(S). 
+    Age wordt al wat complexer met twee opties, het gemmidelde en de mediaan. deze zijn hiervoor bijna hetzelfde maar de mediaan heeft een voordeel, 
+    vergeleken met het gemiddelde verandert het de sprijding van de data minder.
+    als laats is Cabin aan de beurt hier mist 77% van de data wat aanvullen onmogenlijk maakt. Om dit aan te pakken doen we iets interesants, 
+    we spliten Cabin op in twee kolomen. een niewe kolom Cabin met simpelweg of de cabin bekend was of niet. als tweede een kolom Deck waar bij de bekende Cabins het betreffende Deck wordt genoteerd.
+    deze combi is krachtig omdat zo zelfs uit de weinige data toch noch bijna maximaal nut kan worden gehaald.""")
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
