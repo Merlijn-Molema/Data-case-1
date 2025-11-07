@@ -7,7 +7,7 @@ st.set_page_config(page_title="Titanic Route Map", page_icon="🛳️", layout="
 st.title("🗺️ Titanic Route Map (Passenger Pickup Route + Voyage)")
 
 # Reorder tabs: Map first
-tab_map, tab_home, tab_analytics = st.tabs(["🚢 Titanic Route", "🏠 Home", "📊 Analytics"])
+tab_map, tab_home, tab_analytics = st.tabs(["De Titanic", "🏠 Home", "📊 Analytics"])
 
 # --- Tab 1: Titanic Route Map ---
 with tab_map:
