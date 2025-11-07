@@ -25,7 +25,7 @@ with tab3:
     st.header("Titanic Route Map")
     st.write("""
         This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
-        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV), following Channel & Celtic Sea  
+        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV), smooth maritime path  
         - Red line: reached route (including sinking point)  
         - Green dashed line: planned/unreached route  
         - Blue markers: reached points  
@@ -88,17 +88,21 @@ with tab3:
             icon=folium.Icon(color="purple", icon="user", prefix="fa")
         ).add_to(m)
 
-    # Smoothed purple line with multiple intermediate waypoints along Channel and Celtic Sea
+    # Smooth purple line using sequential maritime waypoints
     pickup_route = [
         pickup_points[0][1],       # Southampton
-        [50.2, -1.0],              # southern Channel, east
+        [50.5, -1.2],              # Channel southern edge
+        [50.0, -1.4],
+        [49.8, -1.8],
         pickup_points[1][1],       # Cherbourg
-        [49.5, -2.5],              # mid-Channel southwest
-        [49.3, -3.5],              # western Channel / Celtic Sea entrance
-        [49.0, -4.5],              # Celtic Sea south
-        [50.0, -5.5],              # Celtic Sea mid
-        [50.8, -6.5],              # turning north toward Ireland
-        [51.3, -7.5],              # approaching Cobh from south
+        [49.6, -2.2],
+        [49.5, -3.0],
+        [49.4, -3.8],
+        [49.3, -4.5],
+        [49.5, -5.5],
+        [50.0, -6.5],
+        [50.5, -7.0],
+        [51.0, -7.5],
         pickup_points[2][1],       # Cobh
         coords[0][1]               # Daunt's Rock LV
     ]
@@ -108,7 +112,7 @@ with tab3:
         color="purple",
         weight=3,
         opacity=0.8,
-        tooltip="Passenger Pickup Route (Smoothed, correct Channel & Celtic Sea)"
+        tooltip="Passenger Pickup Route (Smooth maritime path)"
     ).add_to(m)
 
     # Red line: first 7 coords + sinking point
