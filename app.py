@@ -5,7 +5,7 @@ import pandas as pd
 
 # --- Page setup ---
 st.set_page_config(page_title="Titanic Route Map", page_icon="🛳️", layout="centered")
-st.title("🗺️ Titanic Route Map (Passenger Pickup Route + Voyage)")
+st.title("Een voorpeling van overlevingskans op de titanic")
 
 # Reorder tabs: Map first
 tab_map, tab_home, tab_analytics = st.tabs(["De Titanic", "Voorspelling", "Analyse"])
