@@ -4,7 +4,7 @@ from streamlit_folium import st_folium
 
 # --- Page setup ---
 st.set_page_config(page_title="Titanic Route Map", page_icon="🛳️", layout="centered")
-st.title("🗺️ Titanic Route Map (Historical Waypoints + Passenger Pickup Points)")
+st.title("🗺️ Titanic Route Map (Passenger Pickup Route + Voyage)")
 
 tab1, tab2, tab3 = st.tabs(["🏠 Home", "📊 Analytics", "🚢 Titanic Route"])
 
@@ -25,6 +25,7 @@ with tab3:
     st.header("Titanic Route Map")
     st.write("""
         This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
+        - Purple line: passenger pickup route (Cherbourg → Queenstown → Southampton → Daunt’s Rock LV)  
         - Red line: reached route (including sinking point)  
         - Green dashed line: planned/unreached route  
         - Blue markers: reached points  
@@ -48,11 +49,11 @@ with tab3:
         ("Intended Destination: New York", [40.7128, -74.0060])
     ]
 
-    # Passenger pickup points
+    # Passenger pickup points in order
     pickup_points = [
-        ("Southampton, UK", [50.9097, -1.4044]),
         ("Cherbourg, France", [49.6341, -1.6222]),
-        ("Queenstown (Cobh), Ireland", [51.8496, -8.2945])
+        ("Queenstown (Cobh), Ireland", [51.8496, -8.2945]),
+        ("Southampton, UK", [50.9097, -1.4044])
     ]
 
     # Create Folium map with Esri NatGeo background
@@ -79,13 +80,23 @@ with tab3:
                 icon=folium.Icon(color="green", icon="flag", prefix="fa")
             ).add_to(m)
 
-    # Add passenger pickup points (purple)
+    # Add passenger pickup markers (purple)
     for name, coord in pickup_points:
         folium.Marker(
             location=coord,
             popup=f"<b>{name} (Passenger Pickup)</b>",
             icon=folium.Icon(color="purple", icon="user", prefix="fa")
         ).add_to(m)
+
+    # Purple line: pickup points in order → ending at Daunt's Rock LV
+    pickup_route = [coord for _, coord in pickup_points] + [coords[0][1]]  # last is Daunt's Rock LV
+    folium.PolyLine(
+        locations=pickup_route,
+        color="purple",
+        weight=3,
+        opacity=0.8,
+        tooltip="Passenger Pickup Route"
+    ).add_to(m)
 
     # Red line: first 7 coords + sinking point
     folium.PolyLine(
