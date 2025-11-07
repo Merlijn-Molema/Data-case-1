@@ -91,7 +91,7 @@ with tab3:
     # Smooth purple line with adjusted first segment southeastward
     pickup_route = [
         pickup_points[0][1],        # Southampton
-        [50.75, -1.25], [50.6, -1.4], [50.45, -1.55],  # southeastward curve before Cherbourg
+        [50.5, -0.76], [50, -1], [50.45, -1.55],  # southeastward curve before Cherbourg
         pickup_points[1][1],        # Cherbourg
         [49.9, -2.0], [49.8, -2.3], [49.7, -2.6], [49.6, -3.0],
         [49.5, -3.5], [49.4, -4.0], [49.4, -4.5], [49.5, -5.0],
