@@ -19,7 +19,7 @@ with tab_map:
         De oversteek verliep aanvankelijk rustig, maar op 14 april 1912, rond 23:40 uur, raakte de Titanic een ijsberg in het noorden van de Atlantische Oceaan, ongeveer 600 kilometer ten zuiden van Newfoundland, Canada. 
         De botsing veroorzaakte grote schade aan de scheepsromp en leidde uiteindelijk tot het zinken van het schip in de vroege ochtend van 15 april 1912.
         ijdens de ramp probeerde de bemanning de passagiers zo goed mogelijk in reddingsboten te krijgen, maar door een tekort aan boten en chaos aan boord konden niet alle mensen worden gered. 
-        Van de ongeveer 2.224 mensen aan boord overleefden ongeveer 710 passagiers.
+        **Van de ongeveer 2.224 mensen aan boord overleefden ongeveer 710 passagiers.**
     """)
 
     # Coordinates from ET article
