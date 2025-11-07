@@ -130,7 +130,6 @@ with tab_analytics:
     st.write("""Het maken van een voorspelling begint met een nette dataset, hiermee is ook de eerste stap om alle missende waardes weg te werken, 
                 de intieele data van Kaggle komt met 12 kolomen waarvan somig missende data bevatten:""")
     data = {
-    "Name": ["Missende waardes"],
     "PassengerId": [0],
     "Survived": [0],
     "Pclass": [0],
@@ -146,8 +145,9 @@ with tab_analytics:
     
     df = pd.DataFrame(data)
     
-    # Transpose to 12 rows x 1 column
-    st.table(df.T)
+    # Transpose and reset index for better display
+    df_transposed = df.T.reset_index()
+    df_transposed.columns = ["Attribute", "Value"]
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
