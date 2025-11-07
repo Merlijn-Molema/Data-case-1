@@ -2,9 +2,8 @@ import streamlit as st
 import folium
 from streamlit_folium import st_folium
 
-# Page setup
+# --- Page setup ---
 st.set_page_config(page_title="Titanic Route Map", page_icon="🛳️", layout="centered")
-
 st.title("🗺️ Titanic Route Map (Historical Waypoints with Sinking Point)")
 
 tab1, tab2, tab3 = st.tabs(["🏠 Home", "📊 Analytics", "🚢 Titanic Route"])
@@ -25,70 +24,64 @@ with tab2:
 with tab3:
     st.header("Titanic Route Map")
     st.write("""
-        This map shows the Titanic's historical route, with reached points marked in blue,
-        the sinking location in black, and the planned/unreached route in green.
-        Data from Encyclopedia Titanica: [Link](https://www.encyclopedia-titanica.org/keeping-track.html)
+        This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
+        Red line: reached route (including sinking point)  
+        Green dashed line: planned/unreached route  
+        Blue markers: reached points  
+        Black marker: sinking point  
+        Green markers: planned/unreached points
     """)
 
-    # Reached waypoints (actual voyage before sinking)
-    reached_points = [
-        ("Daunt’s Rock LV",      [51 + 43/60,  -8 - 16/60]),  # 51°43' N, 08°16' W
+    # Coordinates from ET article
+    coords = [
+        ("Daunt’s Rock LV",      [51 + 43/60,  -8 - 16/60]),
         ("Old Head of Kinsale (turn)", [51 + 33/60, -8 - 32/60]),
         ("Fastnet Light",        [51 + 23/60, -9 - 36/60]),
         ("Noon Apr 12",          [50 + 6/60, -20 - 43/60]),
         ("Noon Apr 13",          [47 + 22/60, -33 - 10/60]),
         ("Noon Apr 14",          [43 + 2/60, -44 - 31/60]),
         ("Corner (42°N,47°W)",   [42.0, -47.0]),
+        ("Sinking Point",         [41 + 43/60, -49 - 56/60]),
         ("South of Nantucket Shoals", [40 + 35/60, -69 - 36.5/60]),
-        ("Ambrose Channel LV",   [40 + 28/60, -73 - 50/60]),
-    ]
-
-    # Sinking point
-    sinking_point = ("Sinking Point", [41 + 43/60, -49 - 56/60])  # 41°43′ N, 49°56′ W
-
-    # Planned / unreached point
-    planned_points = [
         ("Intended Destination: New York", [40.7128, -74.0060])
     ]
 
-    # Create map
+    # Create Folium map
     m = folium.Map(location=[45, -40], zoom_start=3, tiles="CartoDB positron")
 
-    # Add reached points (blue)
-    for name, coords in reached_points:
-        folium.Marker(
-            location=coords,
-            popup=f"<b>{name}</b>",
-            icon=folium.Icon(color="blue", icon="ship", prefix="fa")
-        ).add_to(m)
+    # Add markers
+    for i, (name, coord) in enumerate(coords):
+        if i <= 6:  # First 7 reached points
+            folium.Marker(
+                location=coord,
+                popup=f"<b>{name}</b>",
+                icon=folium.Icon(color="blue", icon="ship", prefix="fa")
+            ).add_to(m)
+        elif i == 7:  # Sinking point
+            folium.Marker(
+                location=coord,
+                popup=f"<b>{name}</b>",
+                icon=folium.Icon(color="black", icon="exclamation-triangle", prefix="fa")
+            ).add_to(m)
+        else:  # Planned/unreached
+            folium.Marker(
+                location=coord,
+                popup=f"<b>{name}</b>",
+                icon=folium.Icon(color="green", icon="flag", prefix="fa")
+            ).add_to(m)
 
-    # Add sinking point (black)
-    folium.Marker(
-        location=sinking_point[1],
-        popup=f"<b>{sinking_point[0]}</b>",
-        icon=folium.Icon(color="black", icon="exclamation-triangle", prefix="fa")
-    ).add_to(m)
-
-    # Add planned/unreached points (green)
-    for name, coords in planned_points:
-        folium.Marker(
-            location=coords,
-            popup=f"<b>{name}</b>",
-            icon=folium.Icon(color="green", icon="flag", prefix="fa")
-        ).add_to(m)
-
-    # Route line: red up to sinking point
+    # Red line: first 7 coords + sinking point
     folium.PolyLine(
-        locations=[coords for _, coords in reached_points] + [sinking_point[1]],
+        locations=[coord for _, coord in coords[:8]],
         color="red",
         weight=3,
         opacity=0.8,
         tooltip="Titanic Route (Reached)"
     ).add_to(m)
 
-    # Route line: green dashed from sinking point to planned destination
+    # Green dashed line: sinking point → last 2 planned points
     folium.PolyLine(
-        locations=[sinking_point[1], planned_points[0][1]],
+        locations=[coord for _, coord in coords[7:]],
         color="green",
         weight=3,
         opacity=0.8,
