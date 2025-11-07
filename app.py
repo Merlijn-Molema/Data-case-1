@@ -178,13 +178,17 @@ with tab_home:
 
 # --- Tab 3: Analytics ---
 with tab_analytics:
-    st.header("")
-    st.image("byclass.png")
+    st.header("Handmatige analyse van data")
+    st.write("Een van de beste manieren om een goede intuitie te krijgen van een data set blijft altijd om deze te visualizeren, hier zijn een aantal van de meest interesante vebanden verzameld.")
+    st.write("beginnend met een van de voorspelbare geslacht, 1 = Male, 2 = Female")
     st.image("bysex.png")
+    st.image("byclass.png")
     st.image("byagegroup.png")
+    st.image("byalone.png")
     st.image("byclasssex.png")
     st.image("bywealth.png")
-    st.image("byalone.png")
+    st.image("corr.png")
+    
 
 # --- Footer ---
 st.divider()
