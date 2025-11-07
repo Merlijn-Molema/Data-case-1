@@ -1,6 +1,6 @@
 import streamlit as st
 import folium
-from streamlit_folium import st_folium
+from streamlit_folium import st_folium 
 
 # --- Page setup ---
 st.set_page_config(page_title="Titanic Route Map", page_icon="🛳️", layout="centered")
