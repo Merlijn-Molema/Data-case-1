@@ -125,11 +125,18 @@ with tab_home:
 
 # --- Tab 3: Analytics ---
 with tab_analytics:
-    st.header("Analytics")
-    st.write("Placeholder content for Analytics tab.")
-    st.metric(label="Sample Metric", value=42, delta=+3)
-    st.progress(70)
-
+    st.header("Het maken van een voorspelling")
+    st.write("""Het maken van een voorspelling begint met een nette dataset, hiermee is ook de eerste stap om alle missende waardes weg te werken, 
+                de intieele data van Kaggle komt met 12 kolomen waarvan somig missende data bevatten""")
+    data = {
+    "Stop": ["Southampton", "Cherbourg", "Queenstown (Cobh)"],
+    "Country": ["UK", "France", "Ireland"],
+    "Passengers Boarded": [123, 85, 120]
+    }
+    
+    df = pd.DataFrame(data)
+    
+    st.table(df)
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
