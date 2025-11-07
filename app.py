@@ -121,11 +121,6 @@ with tab_map:
 
 # --- Tab 2: Home ---
 with tab_home:
-    st.header("Welcome")
-    st.write("Placeholder content for Home tab.")
-
-# --- Tab 3: Analytics ---
-with tab_analytics:
     st.header("Het maken van een voorspelling")
     st.subheader("Cleaning")
     st.write("""Het maken van een voorspelling begint met een nette dataset, hiermee is ook de eerste stap om alle missende waardes weg te werken, 
@@ -180,6 +175,10 @@ with tab_analytics:
     de volgende stap in dit process zou zijn om dit te beperken met een limiet op max_depth de meest toerijkbare manier""")
     st.write("""Ook is er natuurlijk intresse in de waarde van data voor survival, hier zijn de best 10 genoteerd""")
     st.image("importance.png")
+
+# --- Tab 3: Analytics ---
+with tab_analytics:
+    
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
