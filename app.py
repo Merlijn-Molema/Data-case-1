@@ -25,7 +25,7 @@ with tab3:
     st.header("Titanic Route Map")
     st.write("""
         This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
-        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV)  
+        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV), curved around southern England  
         - Red line: reached route (including sinking point)  
         - Green dashed line: planned/unreached route  
         - Blue markers: reached points  
@@ -49,7 +49,7 @@ with tab3:
         ("Intended Destination: New York", [40.7128, -74.0060])
     ]
 
-    # Passenger pickup points in correct order
+    # Passenger pickup points in chronological order
     pickup_points = [
         ("Southampton, UK", [50.9097, -1.4044]),
         ("Cherbourg, France", [49.6341, -1.6222]),
@@ -88,14 +88,21 @@ with tab3:
             icon=folium.Icon(color="purple", icon="user", prefix="fa")
         ).add_to(m)
 
-    # Purple line: pickup points in order → Daunt's Rock LV
-    pickup_route = [coord for _, coord in pickup_points] + [coords[0][1]]  # last is Daunt's Rock LV
+    # Purple line: Southampton → Cherbourg → curve around southern England → Cobh → Daunt's Rock LV
+    pickup_route = [
+        pickup_points[0][1],  # Southampton
+        pickup_points[1][1],  # Cherbourg
+        [50.5, -1.5],         # Near Isle of Portland (south coast)
+        [51.2, -3.0],         # Southwest tip of England
+        pickup_points[2][1],  # Cobh
+        coords[0][1]          # Daunt's Rock LV
+    ]
     folium.PolyLine(
         locations=pickup_route,
         color="purple",
         weight=3,
         opacity=0.8,
-        tooltip="Passenger Pickup Route"
+        tooltip="Passenger Pickup Route (Curved around England)"
     ).add_to(m)
 
     # Red line: first 7 coords + sinking point
