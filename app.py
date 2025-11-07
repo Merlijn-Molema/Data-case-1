@@ -128,20 +128,20 @@ with tab_home:
 with tab_analytics:
     st.header("Het maken van een voorspelling")
     st.write("""Het maken van een voorspelling begint met een nette dataset, hiermee is ook de eerste stap om alle missende waardes weg te werken, 
-                de intieele data van Kaggle komt met 12 kolomen waarvan somig missende data bevatten""")
+                de intieele data van Kaggle komt met 12 kolomen waarvan somig missende data bevatten:""")
     data = {
-    "Name": ["Titanic"],
-    "Length": [269],
-    "Width": [28],
-    "Tonnage": [46428],
-    "Decks": [9],
-    "Passengers": [2224],
-    "Crew": [892],
-    "Maiden Voyage": ["10-Apr-1912"],
-    "Sinking Date": ["15-Apr-1912"],
-    "Lifeboats": [20],
-    "Iceberg Collision": ["Yes"],
-    "Casualties": [1514]
+    "Name": ["Missende waardes"],
+    "PassengerId": [0],
+    "Survived": [0],
+    "Pclass": [0],
+    "Name": [0],
+    "Sex": [0],
+    "Age": [177],
+    "SibSp": [0],
+    "Parch": [0],
+    "Fare": [0],
+    "Cabin": [687],
+    "Embarked": [2]
     }
     
     df = pd.DataFrame(data)
