@@ -127,6 +127,7 @@ with tab_home:
 # --- Tab 3: Analytics ---
 with tab_analytics:
     st.header("Het maken van een voorspelling")
+    st.subheader("Cleaning")
     st.write("""Het maken van een voorspelling begint met een nette dataset, hiermee is ook de eerste stap om alle missende waardes weg te werken, 
                 de intieele data van Kaggle komt met 12 kolomen waarvan somig missende data bevatten:""")
     data = {
@@ -155,6 +156,7 @@ with tab_analytics:
     als laats is Cabin aan de beurt hier mist 77% van de data wat aanvullen onmogenlijk maakt. Om dit aan te pakken doen we iets interesants, 
     we spliten Cabin op in twee kolomen. een niewe kolom Cabin met simpelweg of de cabin bekend was of niet. als tweede een kolom Deck waar bij de bekende Cabins het betreffende Deck wordt genoteerd.
     deze combi is krachtig omdat zo zelfs uit de weinige data toch noch bijna maximaal nut kan worden gehaald.""")
+    st.subheader("Engineering")
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
