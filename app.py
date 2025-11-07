@@ -49,14 +49,14 @@ with tab3:
         ("Intended Destination: New York", [40.7128, -74.0060])
     ]
 
-    # Passenger pickup points in chronological order
+    # Passenger pickup points
     pickup_points = [
         ("Southampton, UK", [50.9097, -1.4044]),
         ("Cherbourg, France", [49.6341, -1.6222]),
         ("Queenstown (Cobh), Ireland", [51.8496, -8.2945])
     ]
 
-    # Create Folium map with Esri NatGeo background
+    # Create Folium map
     m = folium.Map(location=[45, -40], zoom_start=3, tiles="Esri.NatGeoWorldMap")
 
     # Add reached points (blue)
@@ -80,7 +80,7 @@ with tab3:
                 icon=folium.Icon(color="green", icon="flag", prefix="fa")
             ).add_to(m)
 
-    # Add passenger pickup markers (purple) only at the three pickup points
+    # Add pickup markers (purple) at Southampton, Cherbourg, Cobh only
     for name, coord in pickup_points:
         folium.Marker(
             location=coord,
@@ -88,10 +88,10 @@ with tab3:
             icon=folium.Icon(color="purple", icon="user", prefix="fa")
         ).add_to(m)
 
-    # Smooth purple line through Channel, Celtic Sea, and Daunt's Rock
+    # Smooth purple line with adjusted first segment southeastward
     pickup_route = [
         pickup_points[0][1],        # Southampton
-        [50.7, -1.2], [50.5, -1.4], [50.3, -1.6], [50.1, -1.8],
+        [50.75, -1.25], [50.6, -1.4], [50.45, -1.55],  # southeastward curve before Cherbourg
         pickup_points[1][1],        # Cherbourg
         [49.9, -2.0], [49.8, -2.3], [49.7, -2.6], [49.6, -3.0],
         [49.5, -3.5], [49.4, -4.0], [49.4, -4.5], [49.5, -5.0],
