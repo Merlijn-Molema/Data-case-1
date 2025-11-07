@@ -191,7 +191,7 @@ with tab_analytics:
     st.image("byclasssex.png")
     st.write("1 = Man in Class 1, 2 = Vrouw in Class 1/ Man in Class 2, 3 = Man in Class 3, 4 = Vrouw in Class 2, 6 = Vrouw in Class 3")
     st.image("bywealth.png")
-    st.image("de wealth bins zijn even groot in aantal passagiers")
+    st.write("de wealth bins zijn even groot in aantal passagiers")
     st.image("corr.png")
     
 
