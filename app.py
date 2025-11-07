@@ -145,8 +145,8 @@ with tab_analytics:
     df = pd.DataFrame(data)
     # Transpose and reset index for better display
     df_transposed = df.T.reset_index()
-    df_transposed.columns = ["Attribute", "Value"]
-    st.table(df_transposed.set_index("Attribuut"))
+    df_transposed.columns = ["Data", "Missende waardes"]
+    st.table(df_transposed.set_index("Data"))
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
