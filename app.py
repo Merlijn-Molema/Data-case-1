@@ -6,22 +6,11 @@ from streamlit_folium import st_folium
 st.set_page_config(page_title="Titanic Route Map", page_icon="🛳️", layout="centered")
 st.title("🗺️ Titanic Route Map (Passenger Pickup Route + Voyage)")
 
-tab1, tab2, tab3 = st.tabs(["🏠 Home", "📊 Analytics", "🚢 Titanic Route"])
+# Reorder tabs: Map first
+tab_map, tab_home, tab_analytics = st.tabs(["🚢 Titanic Route", "🏠 Home", "📊 Analytics"])
 
-# --- Tab 1: Home ---
-with tab1:
-    st.header("Welcome")
-    st.write("Placeholder content for Home tab.")
-
-# --- Tab 2: Analytics ---
-with tab2:
-    st.header("Analytics")
-    st.write("Placeholder content for Analytics tab.")
-    st.metric(label="Sample Metric", value=42, delta=+3)
-    st.progress(70)
-
-# --- Tab 3: Titanic Route ---
-with tab3:
+# --- Tab 1: Titanic Route Map ---
+with tab_map:
     st.header("Titanic Route Map")
     st.write("""
         This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
@@ -32,7 +21,7 @@ with tab3:
         - Black marker: sinking point  
         - Green markers: planned/unreached points  
         - Purple markers: passenger pickup points  
-        Background map: Esri NatGeo World Map
+        Background map: Esri NatGeoWorldMap
     """)
 
     # Coordinates from ET article
@@ -130,6 +119,18 @@ with tab3:
 
     # Display map
     st_folium(m, width=700, height=500)
+
+# --- Tab 2: Home ---
+with tab_home:
+    st.header("Welcome")
+    st.write("Placeholder content for Home tab.")
+
+# --- Tab 3: Analytics ---
+with tab_analytics:
+    st.header("Analytics")
+    st.write("Placeholder content for Analytics tab.")
+    st.metric(label="Sample Metric", value=42, delta=+3)
+    st.progress(70)
 
 # --- Footer ---
 st.divider()
