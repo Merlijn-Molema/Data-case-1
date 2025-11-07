@@ -179,6 +179,13 @@ with tab_home:
 # --- Tab 3: Analytics ---
 with tab_analytics:
     st.header("")
+    st.image("byclass.png")
+    st.image("bysex.png")
+    st.image("byagegroup.png")
+    st.image("byclasssex")
+    st.image("bywealth.png")\
+    st.image("byalone.png")
+
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
