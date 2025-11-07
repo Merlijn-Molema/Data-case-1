@@ -157,6 +157,13 @@ with tab_analytics:
     we spliten Cabin op in twee kolomen. een niewe kolom Cabin met simpelweg of de cabin bekend was of niet. als tweede een kolom Deck waar bij de bekende Cabins het betreffende Deck wordt genoteerd.
     deze combi is krachtig omdat zo zelfs uit de weinige data toch noch bijna maximaal nut kan worden gehaald.""")
     st.subheader("Engineering")
+    st.write("""Een schone dataset is de eerste stap naar een voorspelling, maar Feature engineering maakt het verschil tussen een goede gok en een robuste voorspeling. 
+    hierom gaan we een aantal extra kolomen aanmaken, als eerste AgeGroup. Age wordt hiervoor gesplits in 4 goepen, <13, 13-19, 19-60, 60<, zo gekozen om kinderen, tieners, volwassenen en ouderen. 
+    het volgende is CLassSex simpel gedifineerd als Pclass \cdot Sex een vage term voor ons maar deze combinatie van twee belangenrijke parameters geeft veel inzicht aan ml modellen.
+    Title is een van de beste dingen om aan te maken, het bepalen van de Title uit de naam is lastig maar het meer dan waard het specificeerd de blangerijkste parameter verder, Sex.
+    the FamilySize van een persoon is ook bepaald samen met een binaire waarde voor of een persoon allen is, IsAlone. 
+    verder wordt Fare gedeelt door FamSize om te bepalen wat de daadwerkelijke fare was voor een persoon, FarePerPas. 
+    ook word gekeken naar het aantal mensen met het zelfde ticket nummer om mensen in groepen die geen familie zijn te detecteren. als laats is economische status binnen hun Pclass bepaald door  FarePerPas/Pclass.""")
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
