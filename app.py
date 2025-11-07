@@ -169,7 +169,8 @@ with tab_analytics:
     st.subheader("Het model")
     st.write("het gekozen model is xgboost, een treemodel dat er goed met kleine datasets om kan gaan. dit is eerst gerunt met standaard instellingen:")
     st.image("test1.png")
-
+    st.write("door goed te letten op aan welke kant van de plot de pogingen ophopen kunnen we de search in die rocht schuiven, na tientallen iteraties komen we to de volgende range:")
+    st.image("testlast.png")
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
