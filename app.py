@@ -29,16 +29,17 @@ with tab3:
 
     # Historical waypoints per ET article
     waypoints = [
-        ("Daunt’s Rock LV",      [51 + 43/60,  -8 - 16/60]),        # 51° 43’ N, 08° 16’ W :contentReference[oaicite:5]{index=5}
-        ("Old Head of Kinsale (turn)", [51 + 33/60, -8 - 32/60]),    # 51° 33’ N, 08° 32’ W :contentReference[oaicite:6]{index=6}
-        ("Fastnet Light",        [51 + 23/60, -9 - 36/60]),         # 51° 23’ N, 09° 36’ W :contentReference[oaicite:7]{index=7}
-        ("Noon Apr 12",          [50 + 06/60, -20 - 43/60]),        # 50° 06’ N, 20° 43’ W :contentReference[oaicite:8]{index=8}
-        ("Noon Apr 13",          [47 + 22/60, -33 - 10/60]),        # 47° 22’ N, 33° 10’ W :contentReference[oaicite:9]{index=9}
-        ("Noon Apr 14",          [43 + 02/60, -44 - 31/60]),        # 43° 02’ N, 44° 31’ W :contentReference[oaicite:10]{index=10}
-        ("Corner (42°N,47°W)",   [42.0,             -47.0]),         # 42° N, 47° W :contentReference[oaicite:11]{index=11}
-        ("South of Nantucket Shoals", [40 + 35/60, -69 - 36.5/60]), # 40° 35’ N, 69° 36.5’ W :contentReference[oaicite:12]{index=12}
-        ("Ambrose Channel LV",   [40 + 28/60, -73 - 50/60]),        # 40° 28’ N, 73° 50’ W :contentReference[oaicite:13]{index=13}
+        ("Daunt’s Rock LV",      [51 + 43/60,  -8 - 16/60]),        # 51°43' N, 08°16' W
+        ("Old Head of Kinsale (turn)", [51 + 33/60, -8 - 32/60]),    # 51°33' N, 08°32' W
+        ("Fastnet Light",        [51 + 23/60, -9 - 36/60]),         # 51°23' N, 09°36' W
+        ("Noon Apr 12",          [50 + 6/60, -20 - 43/60]),         # 50°06' N, 20°43' W
+        ("Noon Apr 13",          [47 + 22/60, -33 - 10/60]),        # 47°22' N, 33°10' W
+        ("Noon Apr 14",          [43 + 2/60, -44 - 31/60]),         # 43°02' N, 44°31' W
+        ("Corner (42°N,47°W)",   [42.0, -47.0]),                   # 42°N, 47°W
+        ("South of Nantucket Shoals", [40 + 35/60, -69 - 36.5/60]), # 40°35' N, 69°36.5' W
+        ("Ambrose Channel LV",   [40 + 28/60, -73 - 50/60]),        # 40°28' N, 73°50' W
     ]
+
 
     # Create map
     m = folium.Map(location=[45, -40], zoom_start=3, tiles="CartoDB positron")
