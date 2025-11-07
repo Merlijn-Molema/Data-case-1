@@ -180,7 +180,7 @@ with tab_home:
 with tab_analytics:
     st.header("Handmatige analyse van data")
     st.write("Een van de beste manieren om een goede intuitie te krijgen van een data set blijft altijd om deze te visualizeren, hier zijn een aantal van de meest interesante vebanden verzameld.")
-    st.write("beginnend met een van de voorspelbare geslacht en class)
+    st.write("beginnend met een van de voorspelbare geslacht en class")
     st.image("bysex.png")
     st.image("byclass.png")
     st.write("vervolgens wat extra aangemaakte features. deze zijn no gecodeerd voor het lm model, dus ik zal de codering toeligten onder elke grafiek.")
