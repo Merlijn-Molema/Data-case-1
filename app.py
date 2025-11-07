@@ -198,3 +198,4 @@ with tab_analytics:
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
+st.caption("© Titanic - Machine Learning from Disaster | Data from Kaggle")
