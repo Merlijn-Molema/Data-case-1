@@ -25,7 +25,7 @@ with tab3:
     st.header("Titanic Route Map")
     st.write("""
         This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
-        - Purple line: passenger pickup route (Cherbourg → Queenstown → Southampton → Daunt’s Rock LV)  
+        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV)  
         - Red line: reached route (including sinking point)  
         - Green dashed line: planned/unreached route  
         - Blue markers: reached points  
@@ -49,11 +49,11 @@ with tab3:
         ("Intended Destination: New York", [40.7128, -74.0060])
     ]
 
-    # Passenger pickup points in order
+    # Passenger pickup points in correct order
     pickup_points = [
+        ("Southampton, UK", [50.9097, -1.4044]),
         ("Cherbourg, France", [49.6341, -1.6222]),
-        ("Queenstown (Cobh), Ireland", [51.8496, -8.2945]),
-        ("Southampton, UK", [50.9097, -1.4044])
+        ("Queenstown (Cobh), Ireland", [51.8496, -8.2945])
     ]
 
     # Create Folium map with Esri NatGeo background
@@ -88,7 +88,7 @@ with tab3:
             icon=folium.Icon(color="purple", icon="user", prefix="fa")
         ).add_to(m)
 
-    # Purple line: pickup points in order → ending at Daunt's Rock LV
+    # Purple line: pickup points in order → Daunt's Rock LV
     pickup_route = [coord for _, coord in pickup_points] + [coords[0][1]]  # last is Daunt's Rock LV
     folium.PolyLine(
         locations=pickup_route,
