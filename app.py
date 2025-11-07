@@ -73,7 +73,7 @@ with tab_map:
     for name, coord in pickup_points:
         folium.Marker(
             location=coord,
-            popup=f"<b>{name} (Passenger Pickup)</b>",
+            popup=f"<b>{name} (Passagiers afhalen)</b>",
             icon=folium.Icon(color="purple", icon="user", prefix="fa")
         ).add_to(m)
 
@@ -95,7 +95,7 @@ with tab_map:
         color="purple",
         weight=3,
         opacity=0.8,
-        tooltip="Passegiers boarding Route"
+        tooltip="Passagiers boarding Route"
     ).add_to(m)
 
     # Red line: first 7 coords + sinking point
