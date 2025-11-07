@@ -171,6 +171,8 @@ with tab_analytics:
     st.image("test1.png")
     st.write("door goed te letten op aan welke kant van de plot de pogingen ophopen kunnen we de search in die rocht schuiven, na tientallen iteraties komen we to de volgende range:")
     st.image("testlast.png")
+    st.write("na dat de zoek range goed bepaald is kunnen we gaan trainen in volume in de orde van duizenden modellen.")
+    st.image("testvolume.png")
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
