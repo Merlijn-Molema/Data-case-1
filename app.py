@@ -9,21 +9,24 @@ st.title("🗺️ Titanic Route Map (Historical Waypoints with Sinking Point)")
 
 tab1, tab2, tab3 = st.tabs(["🏠 Home", "📊 Analytics", "🚢 Titanic Route"])
 
+# --- Tab 1: Home ---
 with tab1:
     st.header("Welcome")
     st.write("Placeholder content for Home tab.")
 
+# --- Tab 2: Analytics ---
 with tab2:
     st.header("Analytics")
     st.write("Placeholder content for Analytics tab.")
     st.metric(label="Sample Metric", value=42, delta=+3)
     st.progress(70)
 
+# --- Tab 3: Titanic Route ---
 with tab3:
     st.header("Titanic Route Map")
     st.write("""
         This map shows the Titanic's historical route, with reached points marked in blue,
-        the sinking location in black, and planned/unreached points (New York) in green.
+        the sinking location in black, and the planned/unreached route in green.
         Data from Encyclopedia Titanica: [Link](https://www.encyclopedia-titanica.org/keeping-track.html)
     """)
 
@@ -51,7 +54,7 @@ with tab3:
     # Create map
     m = folium.Map(location=[45, -40], zoom_start=3, tiles="CartoDB positron")
 
-    # Add reached points
+    # Add reached points (blue)
     for name, coords in reached_points:
         folium.Marker(
             location=coords,
@@ -59,14 +62,14 @@ with tab3:
             icon=folium.Icon(color="blue", icon="ship", prefix="fa")
         ).add_to(m)
 
-    # Add sinking point
+    # Add sinking point (black)
     folium.Marker(
         location=sinking_point[1],
         popup=f"<b>{sinking_point[0]}</b>",
         icon=folium.Icon(color="black", icon="exclamation-triangle", prefix="fa")
     ).add_to(m)
 
-    # Add planned / unreached points
+    # Add planned/unreached points (green)
     for name, coords in planned_points:
         folium.Marker(
             location=coords,
@@ -74,27 +77,28 @@ with tab3:
             icon=folium.Icon(color="green", icon="flag", prefix="fa")
         ).add_to(m)
 
-    # Draw route line: reached points in red
+    # Route line: red up to sinking point
     folium.PolyLine(
-        locations=[coords for _, coords in reached_points],
+        locations=[coords for _, coords in reached_points] + [sinking_point[1]],
         color="red",
         weight=3,
         opacity=0.8,
         tooltip="Titanic Route (Reached)"
     ).add_to(m)
 
-    # Optional: dashed line from sinking point to planned destination
+    # Route line: green dashed from sinking point to planned destination
     folium.PolyLine(
         locations=[sinking_point[1], planned_points[0][1]],
         color="green",
         weight=3,
-        opacity=0.5,
-        tooltip="Planned Route (Unreached)",
+        opacity=0.8,
+        tooltip="Titanic Planned Route (Unreached)",
         dash_array="5,10"
     ).add_to(m)
 
     # Display map
     st_folium(m, width=700, height=500)
 
+# --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
