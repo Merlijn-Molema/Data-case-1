@@ -146,7 +146,7 @@ with tab_analytics:
     # Transpose and reset index for better display
     df_transposed = df.T.reset_index()
     df_transposed.columns = ["Attribute", "Value"]
-    st.table(df_transposed)
+    st.table(df_transposed, hide_index=True)
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
