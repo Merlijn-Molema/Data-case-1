@@ -31,7 +31,7 @@ with tab3:
         - Blue markers: reached points  
         - Black marker: sinking point  
         - Green markers: planned/unreached points  
-        - Purple markers: passenger pickup points with numbers  
+        - Purple markers: passenger pickup points  
         Background map: Esri NatGeo World Map
     """)
 
@@ -80,7 +80,15 @@ with tab3:
                 icon=folium.Icon(color="green", icon="flag", prefix="fa")
             ).add_to(m)
 
-    # Smoothed purple line with additional sequential waypoints for a gentle curve
+    # Add passenger pickup markers (purple) only at the three pickup points
+    for name, coord in pickup_points:
+        folium.Marker(
+            location=coord,
+            popup=f"<b>{name} (Passenger Pickup)</b>",
+            icon=folium.Icon(color="purple", icon="user", prefix="fa")
+        ).add_to(m)
+
+    # Smooth purple line through Channel, Celtic Sea, and Daunt's Rock
     pickup_route = [
         pickup_points[0][1],        # Southampton
         [50.7, -1.2], [50.5, -1.4], [50.3, -1.6], [50.1, -1.8],
@@ -93,25 +101,13 @@ with tab3:
         coords[0][1]                # Daunt's Rock LV
     ]
 
-    # Draw purple line
     folium.PolyLine(
         locations=pickup_route,
         color="purple",
         weight=3,
         opacity=0.8,
-        tooltip="Passenger Pickup Route (Smoothed maritime path)"
+        tooltip="Passenger Pickup Route (Smooth maritime path)"
     ).add_to(m)
-
-    # Add numbered markers along the purple route
-    for idx, (name, coord) in enumerate([("1: Southampton", pickup_points[0][1]),
-                                         ("2: Cherbourg", pickup_points[1][1]),
-                                         ("3: Cobh", pickup_points[2][1]),
-                                         ("4: Daunt's Rock LV", coords[0][1])]):
-        folium.Marker(
-            location=coord,
-            popup=f"<b>{name}</b>",
-            icon=folium.DivIcon(html=f"""<div style="font-size:12pt; color:purple;"><b>{idx+1}</b></div>""")
-        ).add_to(m)
 
     # Red line: first 7 coords + sinking point
     folium.PolyLine(
