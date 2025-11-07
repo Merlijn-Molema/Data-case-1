@@ -183,7 +183,7 @@ with tab_analytics:
     st.image("bysex.png")
     st.image("byagegroup.png")
     st.image("byclasssex")
-    st.image("bywealth.png")\
+    st.image("bywealth.png")
     st.image("byalone.png")
 
 # --- Footer ---
