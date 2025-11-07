@@ -25,14 +25,14 @@ with tab3:
     st.header("Titanic Route Map")
     st.write("""
         This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
-        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV), smooth maritime path  
+        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV), smoothed along Channel & Celtic Sea  
         - Red line: reached route (including sinking point)  
         - Green dashed line: planned/unreached route  
         - Blue markers: reached points  
         - Black marker: sinking point  
         - Green markers: planned/unreached points  
-        - Purple markers: passenger pickup points  
-        Background map: Esri NatGeoWorldMap
+        - Purple markers: passenger pickup points with numbers  
+        Background map: Esri NatGeo World Map
     """)
 
     # Coordinates from ET article
@@ -80,40 +80,38 @@ with tab3:
                 icon=folium.Icon(color="green", icon="flag", prefix="fa")
             ).add_to(m)
 
-    # Add passenger pickup markers (purple)
-    for name, coord in pickup_points:
-        folium.Marker(
-            location=coord,
-            popup=f"<b>{name} (Passenger Pickup)</b>",
-            icon=folium.Icon(color="purple", icon="user", prefix="fa")
-        ).add_to(m)
-
-    # Smooth purple line using sequential maritime waypoints
+    # Smoothed purple line with additional sequential waypoints for a gentle curve
     pickup_route = [
-        pickup_points[0][1],       # Southampton
-        [50.5, -1.2],              # Channel southern edge
-        [50.0, -1.4],
-        [49.8, -1.8],
-        pickup_points[1][1],       # Cherbourg
-        [49.6, -2.2],
-        [49.5, -3.0],
-        [49.4, -3.8],
-        [49.3, -4.5],
-        [49.5, -5.5],
-        [50.0, -6.5],
-        [50.5, -7.0],
-        [51.0, -7.5],
-        pickup_points[2][1],       # Cobh
-        coords[0][1]               # Daunt's Rock LV
+        pickup_points[0][1],        # Southampton
+        [50.7, -1.2], [50.5, -1.4], [50.3, -1.6], [50.1, -1.8],
+        pickup_points[1][1],        # Cherbourg
+        [49.9, -2.0], [49.8, -2.3], [49.7, -2.6], [49.6, -3.0],
+        [49.5, -3.5], [49.4, -4.0], [49.4, -4.5], [49.5, -5.0],
+        [49.7, -5.5], [50.0, -6.0], [50.3, -6.5], [50.6, -7.0],
+        [51.0, -7.3], [51.4, -7.7],
+        pickup_points[2][1],        # Cobh
+        coords[0][1]                # Daunt's Rock LV
     ]
 
+    # Draw purple line
     folium.PolyLine(
         locations=pickup_route,
         color="purple",
         weight=3,
         opacity=0.8,
-        tooltip="Passenger Pickup Route (Smooth maritime path)"
+        tooltip="Passenger Pickup Route (Smoothed maritime path)"
     ).add_to(m)
+
+    # Add numbered markers along the purple route
+    for idx, (name, coord) in enumerate([("1: Southampton", pickup_points[0][1]),
+                                         ("2: Cherbourg", pickup_points[1][1]),
+                                         ("3: Cobh", pickup_points[2][1]),
+                                         ("4: Daunt's Rock LV", coords[0][1])]):
+        folium.Marker(
+            location=coord,
+            popup=f"<b>{name}</b>",
+            icon=folium.DivIcon(html=f"""<div style="font-size:12pt; color:purple;"><b>{idx+1}</b></div>""")
+        ).add_to(m)
 
     # Red line: first 7 coords + sinking point
     folium.PolyLine(
