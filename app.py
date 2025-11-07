@@ -163,7 +163,13 @@ with tab_analytics:
     Title is een van de beste dingen om aan te maken, het bepalen van de Title uit de naam is lastig maar het meer dan waard het specificeerd de blangerijkste parameter verder, Sex.
     the FamilySize van een persoon is ook bepaald samen met een binaire waarde voor of een persoon allen is, IsAlone. 
     verder wordt Fare gedeelt door FamSize om te bepalen wat de daadwerkelijke fare was voor een persoon, FarePerPas. 
-    ook word gekeken naar het aantal mensen met het zelfde ticket nummer om mensen in groepen die geen familie zijn te detecteren. als laats is economische status binnen hun Pclass bepaald door  FarePerPas/Pclass.""")
+    ook word gekeken naar het aantal mensen met het zelfde ticket nummer om mensen in groepen die geen familie zijn te detecteren. als laats is economische status binnen hun Pclass bepaald door  FarePerPas/Pclass.
+    ook moeten al dez ding worden omgezet naar numerieke waarden voor een ml model.""")
+
+    st.subheader("Het model")
+    st.write("het gekozen model is xgboost, een treemodel dat er goed met kleine datasets om kan gaan. dit is eerst gerunt met standaard instellingen:")
+    st.image("test1.png")
+
 # --- Footer ---
 st.divider()
 st.caption("© 2025 Titanic Route Map | Data from Encyclopedia Titanica")
