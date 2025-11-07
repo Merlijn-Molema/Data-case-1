@@ -32,45 +32,55 @@ with tab2:
     st.progress(70)
 
 # --- Tab 3: Titanic Route (Folium Map) ---
-with tab3:
-    st.header("🗺️ Titanic Route Map (Folium)")
+import streamlit as st
+import folium
+from streamlit_folium import st_folium
+import math
 
-    st.write("""
-        This interactive map shows the approximate route of the RMS Titanic:
-        **Southampton → Cherbourg → Queenstown (Cobh) → Intended destination: New York City**.
-    """)
+def make_map():
+    # Waypoints approximate the track
+    waypoints = [
+        ("Southampton, UK",    [50.9097, -1.4044]),
+        ("Cherbourg, France",  [49.6341, -1.6222]),
+        ("Queenstown (Cobh)",  [51.8496, -8.2945]),
+        # “Corner” point
+        ("The Corner (42°N,47°W)", [42.0, -47.0]),
+        # Point near Nantucket Shoals
+        ("South of Nantucket Shoals", [40.5833, -69.6083]),
+        # Iceberg collision approximate
+        ("Collision Point (~41°46′N,49°56′W)", [41.7667, -49.9333]),
+        # Wreck site
+        ("Wreck Site (~41°43′N,49°56′W)",   [41.7167, -49.9333]),
+        # Optional: Intended destination (NY)
+        ("Intended Destination: New York City", [40.7128, -74.0060]),
+    ]
 
-    # Coordinates (latitude, longitude)
-    ports = {
-        "Southampton, UK": [50.9097, -1.4044],
-        "Cherbourg, France": [49.6341, -1.6222],
-        "Queenstown (Cobh), Ireland": [51.8496, -8.2945],
-        "New York City, USA": [40.7128, -74.0060]
-    }
+    m = folium.Map(location=[45, -40], zoom_start=3, tiles="CartoDB positron")
 
-    # Initialize Folium map centered roughly mid-Atlantic
-    m = folium.Map(location=[45, -30], zoom_start=3, tiles="CartoDB positron")
-
-    # Add markers for each port
-    for name, coords in ports.items():
+    # Add markers
+    for name, coords in waypoints:
         folium.Marker(
             location=coords,
             popup=f"<b>{name}</b>",
             icon=folium.Icon(color="blue", icon="ship", prefix="fa")
         ).add_to(m)
 
-    # Add route line
-    folium.PolyLine(
-        locations=list(ports.values()),
-        color="red",
-        weight=3,
-        opacity=0.8,
-        tooltip="Titanic Route"
-    ).add_to(m)
+    # Polyline through waypoints (makes a more realistic curved route)
+    locations = [coords for name, coords in waypoints]
+    folium.PolyLine(locations=locations,
+                    color="red",
+                    weight=3,
+                    opacity=0.8,
+                    tooltip="Approximate Titanic Track").add_to(m)
 
-    # Display Folium map inside Streamlit
+    return m
+
+with tab3:
+    st.header("🗺️ Titanic Route Map (Approximate Actual Track)")
+    st.write("""
+        This map uses known navigational waypoints of the Titanic’s maiden voyage, including
+        stops and the point of collision. It is an approximation — the exact continuous track is not publicly available.
+    """)
+    m = make_map()
     st_folium(m, width=700, height=500)
 
-# --- Footer ---
-st.divider()
-st.caption("© 2025 Example Streamlit App | Built with ❤️ and Streamlit | Data: Historical Titanic Route")
