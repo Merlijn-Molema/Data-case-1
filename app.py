@@ -8,7 +8,7 @@ st.set_page_config(page_title="Titanic Route Map", page_icon="🛳️", layout="
 st.title("🗺️ Titanic Route Map (Passenger Pickup Route + Voyage)")
 
 # Reorder tabs: Map first
-tab_map, tab_home, tab_analytics = st.tabs(["De Titanic", "🏠 Home", "📊 Analytics"])
+tab_map, tab_home, tab_analytics = st.tabs(["De Titanic", "Voorspelling", "Analyse"])
 
 # --- Tab 1: Titanic Route Map ---
 with tab_map:
@@ -180,13 +180,18 @@ with tab_home:
 with tab_analytics:
     st.header("Handmatige analyse van data")
     st.write("Een van de beste manieren om een goede intuitie te krijgen van een data set blijft altijd om deze te visualizeren, hier zijn een aantal van de meest interesante vebanden verzameld.")
-    st.write("beginnend met een van de voorspelbare geslacht, 1 = Male, 2 = Female")
+    st.write("beginnend met een van de voorspelbare geslacht en class)
     st.image("bysex.png")
     st.image("byclass.png")
+    st.write("vervolgens wat extra aangemaakte features. deze zijn no gecodeerd voor het lm model, dus ik zal de codering toeligten onder elke grafiek.")
     st.image("byagegroup.png")
+    st.write("0 = <13, 1 = 13-19, 2 = 19-60, 3 = 60<")
     st.image("byalone.png")
+    st.write("0/1 = Y/N")
     st.image("byclasssex.png")
+    st.write("1 = Man in Class 1, 2 = Vrouw in Class 1/ Man in Class 2, 3 = Man in Class 3, 4 = Vrouw in Class 2, 6 = Vrouw in Class 3")
     st.image("bywealth.png")
+    st.image("de wealth bins zijn even groot in aantal passagiers")
     st.image("corr.png")
     
 
