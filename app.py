@@ -1,12 +1,13 @@
 import streamlit as st
-import plotly.graph_objects as go
+import folium
+from streamlit_folium import st_folium
 
 # --- Page Setup ---
 st.set_page_config(page_title="Three Tabs Demo", page_icon="🛳️", layout="centered")
 
 # --- Title ---
 st.title("🧭 Streamlit Three Tabs Example")
-st.write("This is a simple demo app with three tabs and an interactive map of the Titanic route.")
+st.write("This is a simple demo app with three tabs and an interactive Folium map of the Titanic route.")
 
 # --- Tabs ---
 tab1, tab2, tab3 = st.tabs(["🏠 Home", "📊 Analytics", "🗺️ Titanic Route"])
@@ -30,9 +31,9 @@ with tab2:
     st.metric(label="Sample Metric", value="42", delta="+3")
     st.progress(70)
 
-# --- Tab 3: Titanic Route ---
+# --- Tab 3: Titanic Route (Folium Map) ---
 with tab3:
-    st.header("🗺️ Titanic Route Map")
+    st.header("🗺️ Titanic Route Map (Folium)")
 
     st.write("""
         This interactive map shows the approximate route of the RMS Titanic:
@@ -47,40 +48,28 @@ with tab3:
         "New York City, USA": [40.7128, -74.0060]
     }
 
-    lats = [v[0] for v in ports.values()]
-    lons = [v[1] for v in ports.values()]
-    names = list(ports.keys())
+    # Initialize Folium map centered roughly mid-Atlantic
+    m = folium.Map(location=[45, -30], zoom_start=3, tiles="CartoDB positron")
 
-    # Plotly map figure
-    fig = go.Figure()
+    # Add markers for each port
+    for name, coords in ports.items():
+        folium.Marker(
+            location=coords,
+            popup=f"<b>{name}</b>",
+            icon=folium.Icon(color="blue", icon="ship", prefix="fa")
+        ).add_to(m)
 
-    # Route line
-    fig.add_trace(go.Scattergeo(
-        lon=lons,
-        lat=lats,
-        mode='lines+markers+text',
-        text=names,
-        textposition="top center",
-        line=dict(width=2, color="blue"),
-        marker=dict(size=8, color="red"),
-    ))
+    # Add route line
+    folium.PolyLine(
+        locations=list(ports.values()),
+        color="red",
+        weight=3,
+        opacity=0.8,
+        tooltip="Titanic Route"
+    ).add_to(m)
 
-    # Layout
-    fig.update_layout(
-        title="RMS Titanic Route (1912)",
-        geo=dict(
-            projection_type="natural earth",
-            showcountries=True,
-            showcoastlines=True,
-            showland=True,
-            landcolor="rgb(243, 243, 243)",
-            countrycolor="rgb(204, 204, 204)",
-        ),
-        height=500
-    )
-
-    # Display interactive map
-    st.plotly_chart(fig, use_container_width=True)
+    # Display Folium map inside Streamlit
+    st_folium(m, width=700, height=500)
 
 # --- Footer ---
 st.divider()
