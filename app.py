@@ -11,17 +11,15 @@ tab_map, tab_home, tab_analytics = st.tabs(["🚢 Titanic Route", "🏠 Home", "
 
 # --- Tab 1: Titanic Route Map ---
 with tab_map:
-    st.header("Titanic Route Map")
+    st.header("De Titanic")
     st.write("""
-        This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
-        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV), smoothed along Channel & Celtic Sea  
-        - Red line: reached route (including sinking point)  
-        - Green dashed line: planned/unreached route  
-        - Blue markers: reached points  
-        - Black marker: sinking point  
-        - Green markers: planned/unreached points  
-        - Purple markers: passenger pickup points  
-        Background map: Esri NatGeoWorldMap
+        De RMS Titanic vertrok op 10 april 1912 vanuit Southampton, Engeland, met als bestemming New York, Verenigde Staten.
+        De geplande route leidde de Titanic langs de kust van Engeland, Frankrijk en Ierland, waarna het schip de Atlantische Oceaan overstak. 
+        Onderweg maakte het een korte stop in Cherbourg, Frankrijk, en daarna in Queenstown (nu Cobh), Ierland, om extra passagiers en post op te nemen.
+        De oversteek verliep aanvankelijk rustig, maar op 14 april 1912, rond 23:40 uur, raakte de Titanic een ijsberg in het noorden van de Atlantische Oceaan, ongeveer 600 kilometer ten zuiden van Newfoundland, Canada. 
+        De botsing veroorzaakte grote schade aan de scheepsromp en leidde uiteindelijk tot het zinken van het schip in de vroege ochtend van 15 april 1912.
+        ijdens de ramp probeerde de bemanning de passagiers zo goed mogelijk in reddingsboten te krijgen, maar door een tekort aan boten en chaos aan boord konden niet alle mensen worden gered. 
+        Van de ongeveer 2.224 mensen aan boord overleefden ongeveer 710 passagiers.
     """)
 
     # Coordinates from ET article
