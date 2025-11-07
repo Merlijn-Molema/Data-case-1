@@ -25,7 +25,7 @@ with tab3:
     st.header("Titanic Route Map")
     st.write("""
         This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
-        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV), curved around southern England  
+        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV), following the English Channel  
         - Red line: reached route (including sinking point)  
         - Green dashed line: planned/unreached route  
         - Blue markers: reached points  
@@ -88,12 +88,12 @@ with tab3:
             icon=folium.Icon(color="purple", icon="user", prefix="fa")
         ).add_to(m)
 
-    # Purple line: Southampton → Cherbourg → curve around southern England → Cobh → Daunt's Rock LV
+    # Purple line: Southampton → Cherbourg → curve along English Channel → Cobh → Daunt's Rock LV
     pickup_route = [
         pickup_points[0][1],  # Southampton
         pickup_points[1][1],  # Cherbourg
-        [50.5, -1.5],         # Near Isle of Portland (south coast)
-        [51.2, -3.0],         # Southwest tip of England
+        [50.7, -0.9],         # Intermediate point east along Channel, north of Isle of Portland
+        [51.2, -2.5],         # Another Channel waypoint, southwest of England coast
         pickup_points[2][1],  # Cobh
         coords[0][1]          # Daunt's Rock LV
     ]
@@ -102,7 +102,7 @@ with tab3:
         color="purple",
         weight=3,
         opacity=0.8,
-        tooltip="Passenger Pickup Route (Curved around England)"
+        tooltip="Passenger Pickup Route (Curved along Channel)"
     ).add_to(m)
 
     # Red line: first 7 coords + sinking point
