@@ -33,9 +33,9 @@ with tab_map:
         ("Noon Apr 13",          [47 + 22/60, -33 - 10/60]),
         ("Noon Apr 14",          [43 + 2/60, -44 - 31/60]),
         ("Corner (42°N,47°W)",   [42.0, -47.0]),
-        ("Sinking Point",         [41 + 43/60, -49 - 56/60]),
-        ("South of Nantucket Shoals", [40 + 35/60, -69 - 36.5/60]),
-        ("Intended Destination: New York", [40.7128, -74.0060])
+        ("Punt van zinken",         [41 + 43/60, -49 - 56/60]),
+        ("Zuid van Nantucket Shoals", [40 + 35/60, -69 - 36.5/60]),
+        ("Bestemming: New York", [40.7128, -74.0060])
     ]
 
     # Passenger pickup points
@@ -95,7 +95,7 @@ with tab_map:
         color="purple",
         weight=3,
         opacity=0.8,
-        tooltip="Passenger Pickup Route (Smooth maritime path)"
+        tooltip="Passegiers boarding Route"
     ).add_to(m)
 
     # Red line: first 7 coords + sinking point
@@ -104,7 +104,7 @@ with tab_map:
         color="red",
         weight=3,
         opacity=0.8,
-        tooltip="Titanic Route (Reached)"
+        tooltip="afgelegde route"
     ).add_to(m)
 
     # Green dashed line: sinking point → last 2 planned points
@@ -113,7 +113,7 @@ with tab_map:
         color="green",
         weight=3,
         opacity=0.8,
-        tooltip="Titanic Planned Route (Unreached)",
+        tooltip="geplande route",
         dash_array="5,10"
     ).add_to(m)
 
