@@ -25,14 +25,14 @@ with tab3:
     st.header("Titanic Route Map")
     st.write("""
         This map shows the Titanic's route using historical waypoints from Encyclopedia Titanica.
-        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV), smoothed along the Channel and Celtic Sea  
+        - Purple line: passenger pickup route (Southampton → Cherbourg → Cobh → Daunt’s Rock LV), following Channel & Celtic Sea  
         - Red line: reached route (including sinking point)  
         - Green dashed line: planned/unreached route  
         - Blue markers: reached points  
         - Black marker: sinking point  
         - Green markers: planned/unreached points  
         - Purple markers: passenger pickup points  
-        Background map: Esri NatGeo World Map
+        Background map: Esri NatGeoWorldMap
     """)
 
     # Coordinates from ET article
@@ -88,17 +88,17 @@ with tab3:
             icon=folium.Icon(color="purple", icon="user", prefix="fa")
         ).add_to(m)
 
-    # Smoothed purple line with multiple intermediate waypoints
+    # Smoothed purple line with multiple intermediate waypoints along Channel and Celtic Sea
     pickup_route = [
         pickup_points[0][1],       # Southampton
-        [50.5, -1.4],              # along Channel
+        [50.2, -1.0],              # southern Channel, east
         pickup_points[1][1],       # Cherbourg
-        [49.9, -1.8],              # mid-Channel southwestward
-        [49.7, -2.5],              # mid-Channel southwest
-        [49.5, -3.5],              # approaching western Channel
-        [49.5, -4.5],              # Celtic Sea entrance
-        [50.5, -6.0],              # Celtic Sea mid
-        [51.0, -7.0],              # approaching Ireland from south
+        [49.5, -2.5],              # mid-Channel southwest
+        [49.3, -3.5],              # western Channel / Celtic Sea entrance
+        [49.0, -4.5],              # Celtic Sea south
+        [50.0, -5.5],              # Celtic Sea mid
+        [50.8, -6.5],              # turning north toward Ireland
+        [51.3, -7.5],              # approaching Cobh from south
         pickup_points[2][1],       # Cobh
         coords[0][1]               # Daunt's Rock LV
     ]
@@ -108,7 +108,7 @@ with tab3:
         color="purple",
         weight=3,
         opacity=0.8,
-        tooltip="Passenger Pickup Route (Smoothed through Channel & Celtic Sea)"
+        tooltip="Passenger Pickup Route (Smoothed, correct Channel & Celtic Sea)"
     ).add_to(m)
 
     # Red line: first 7 coords + sinking point
